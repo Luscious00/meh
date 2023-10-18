@@ -12,6 +12,7 @@ from sd_meh.utils import MERGE_METHODS, weights_and_bases
 @click.option("-a", "--model_a", "model_a", type=str)
 @click.option("-b", "--model_b", "model_b", type=str)
 @click.option("-c", "--model_c", "model_c", default=None, type=str)
+@click.option("-d_sub", "--model_d_sub", "model_d_sub", default=None, type=str)
 @click.option(
     "-m",
     "--merging_method",
@@ -116,6 +117,7 @@ def main(
     model_a,
     model_b,
     model_c,
+    model_d_sub,
     merge_mode,
     weights_clip,
     precision,
@@ -145,6 +147,8 @@ def main(
     models = {"model_a": model_a, "model_b": model_b}
     if model_c:
         models["model_c"] = model_c
+    if model_d_sub:
+        models["model_d"] = model_d_sub
 
     weights, bases = weights_and_bases(
         merge_mode,
